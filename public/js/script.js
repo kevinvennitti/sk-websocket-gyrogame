@@ -51,7 +51,7 @@ function newTargetDot() {
 }
 
 function draw() {
-  background(20);
+  background("#0019CC");
 
   dotPosition.x += (deviceOrientation.x - dotPosition.x) * easing;
   dotPosition.y += (deviceOrientation.y - dotPosition.y) * easing;
@@ -64,24 +64,23 @@ function draw() {
 
 
   noFill();
-  stroke(200);
-  strokeWeight(2);
+  stroke("#EC4E3A");
+  strokeWeight(3);
 
   push();
   getTranslate(targetDotPosition);
-  ellipse(-25,-25, 50, 50);
+  ellipse(-50,-50, 100, 100);
   pop();
 
+  
 
 
-
-
-  fill(255);
+  fill("#F7CE4C");
   noStroke();
 
   push();
   getTranslate(dotPosition);
-  ellipse(-25,-25, 50, 50);
+  ellipse(-50,-50, 100, 100);
   pop();
 
 
@@ -91,6 +90,8 @@ function draw() {
   if (abs(round(dotPosition.x) - round(_targetDotPosition.x)) < 3
    && abs(round(dotPosition.y) - round(_targetDotPosition.y)) < 3) {
     newTargetDot();
+    
+    socket.emit('goal');
   }
 
 }

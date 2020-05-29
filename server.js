@@ -22,13 +22,16 @@ io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
 
   socket.on('deviceOrientation', function (data) {
-    console.log('Le serveur a reçu l\'orientation du téléphone !');
-    console.log('Données reçues :');
     console.log(data);
 
-    console.log('On transmet ces données à toutes les pages connectées');
     io.sockets.emit('setDeviceOrientation', {
       deviceOrientation: data.deviceOrientation
-    })
+    });
+  });
+
+  socket.on('goal', function (data) {
+    console.log(data);
+
+    io.sockets.emit('hasWin');
   });
 });

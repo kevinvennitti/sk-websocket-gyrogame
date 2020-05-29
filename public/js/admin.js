@@ -1,3 +1,5 @@
+let score = 0;
+
 window.onload = function(){
 
   function handleOrientation(event) {
@@ -6,8 +8,6 @@ window.onload = function(){
       y: 0,
       z: 0
     };
-
-    $('body').text('hey');
 
     deviceOrientation.x = parseInt(event.beta); // Entre [-180,180]
     deviceOrientation.y = parseInt(event.gamma); // Entre [-90,90]
@@ -18,5 +18,13 @@ window.onload = function(){
     });
   }
 
-  window.addEventListener('deviceorientation', handleOrientation);
+  window.addEventListener('deviceorientation', handleOrientation);  
 }
+
+socket.on('hasWin', function(){
+  navigator.vibrate(50);
+  
+  score++;
+  
+  $('#score').text(score);
+});
